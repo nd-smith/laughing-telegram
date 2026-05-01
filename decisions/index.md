@@ -4,3 +4,4 @@
 - [Use ADRs for design decisions](0002-use-adrs-for-design-decisions.md) {2026-05-01} — every option-3 pause produces an ADR; standard ADR format
 - [Issues-driven workflow for pipeline code work](0003-issues-driven-workflow.md) {2026-05-01} — pipeline code work requires an issue file; meta/bootstrap work is exempt
 - [Issue completion workflow](0004-issue-completion-workflow.md) {2026-05-01} — move completed issues to issues/complete/; strikethrough index entry with both dates and dev notes
+- [Pin dependencies with exact versions](0005-pin-dependencies-with-exact-versions.md) {2026-05-01} — `requirements.txt` uses `==` for reproducible builds; deliberate manual bumps

@@ -1,6 +1,6 @@
 # Issue Index
 
-- [0001 — Project scaffolding & dependencies](0001_project_scaffolding_and_dependencies.md) {2026-05-01} — repo directories, `__init__.py` files, `requirements.txt`
+- ~~[0001 — Project scaffolding & dependencies](complete/0001_project_scaffolding_and_dependencies.md)~~ {2026-05-01 → 2026-05-01} [created `pipeline/`, `pipeline/sources/`, `shared/`, `tests/` with empty `__init__.py`; pinned `requirements.txt` with seven deps; ADR 0005]
 - [0002 — Envelope construction](0002_envelope_construction.md) {2026-05-01} — `pipeline/envelope.py` pure builder + tests
 - [0003 — Event validation](0003_event_validation.md) {2026-05-01} — `pipeline/validation.py` minimal required-fields check + tests
 - [0004 — Source module contract & loader](0004_source_module_contract_and_loader.md) {2026-05-01} — `pipeline/sources/__init__.py` loader, contract docstring, fixture-based tests
