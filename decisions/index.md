@@ -16,3 +16,6 @@
 - [Parquet schema: flat envelope columns plus JSON metadata/payload](0014-parquet-schema-flat-columns-plus-json.md) {2026-05-02} — top-level fields as typed columns; `metadata` and `payload` as JSON strings
 - [Kafka publisher sync semantics: per-message produce + flush](0015-kafka-publisher-sync-via-produce-flush.md) {2026-05-02} — `publish()` does `produce()` then `flush(timeout)`; rejected delivery-report Event signalling
 - [Kafka publisher: strict JSON serialisation, callers own type conversion](0016-kafka-publisher-strict-json-serialisation.md) {2026-05-02} — `json.dumps(envelope)` with no `default=`; envelope.py owns UUID/datetime stringification
+- [Processor class shape and module name](0017-processor-class-shape-and-module-name.md) {2026-05-02} — `Processor` class in `pipeline/processor.py`; rejected free function and `process.py` name
+- [DLQ payload is a flat dict, not an envelope](0018-dlq-payload-flat-dict.md) {2026-05-02} — literal four PRD §Dead Letter Queue fields; rejected envelope wrap
+- [Retry policy defaults: 3 retries, exponential backoff base 1s, injectable sleep](0019-retry-policy-defaults.md) {2026-05-02} — 1s/2s/4s defaults, configurable; `sleep` injected for fast tests
