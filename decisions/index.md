@@ -14,3 +14,5 @@
 - [Event Hub consumer shutdown driven by entry-point flag](0012-consumer-shutdown-driven-by-entry-point-flag.md) {2026-05-02} — `run(callback, shutdown: Event)`; watcher thread closes client on flag set
 - [OneLake writer interval flush via background thread](0013-writer-interval-flush-via-background-thread.md) {2026-05-02} — daemon flusher thread + buffer lock; rejected `add()`-time check and entry-point `tick()`
 - [Parquet schema: flat envelope columns plus JSON metadata/payload](0014-parquet-schema-flat-columns-plus-json.md) {2026-05-02} — top-level fields as typed columns; `metadata` and `payload` as JSON strings
+- [Kafka publisher sync semantics: per-message produce + flush](0015-kafka-publisher-sync-via-produce-flush.md) {2026-05-02} — `publish()` does `produce()` then `flush(timeout)`; rejected delivery-report Event signalling
+- [Kafka publisher: strict JSON serialisation, callers own type conversion](0016-kafka-publisher-strict-json-serialisation.md) {2026-05-02} — `json.dumps(envelope)` with no `default=`; envelope.py owns UUID/datetime stringification
