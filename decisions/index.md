@@ -10,3 +10,5 @@
 - [Source-loader test fixtures via in-memory `sys.modules`](0008-source-loader-test-fixtures-via-sys-modules.md) {2026-05-02} — fake source modules constructed in tests, no on-disk fixture tree
 - [Log context via `contextvars`](0009-log-context-via-contextvars.md) {2026-05-02} — `log_context` context manager + filter-stamped record attrs; rejected `LoggerAdapter` and per-call `extra=`
 - [Custom JSON formatter, no `python-json-logger` dependency](0010-custom-json-formatter-no-dependency.md) {2026-05-02} — small `Formatter` subclass with `json.dumps(default=str)`; no new requirement
+- [Event Hub consumer callback shape: single-event](0011-consumer-callback-shape-single-event.md) {2026-05-02} — `callback(event)` per non-`None` event; checkpoint after success, log+continue on raise
+- [Event Hub consumer shutdown driven by entry-point flag](0012-consumer-shutdown-driven-by-entry-point-flag.md) {2026-05-02} — `run(callback, shutdown: Event)`; watcher thread closes client on flag set
