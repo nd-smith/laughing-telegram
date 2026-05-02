@@ -19,3 +19,5 @@
 - [Processor class shape and module name](0017-processor-class-shape-and-module-name.md) {2026-05-02} — `Processor` class in `pipeline/processor.py`; rejected free function and `process.py` name
 - [DLQ payload is a flat dict, not an envelope](0018-dlq-payload-flat-dict.md) {2026-05-02} — literal four PRD §Dead Letter Queue fields; rejected envelope wrap
 - [Retry policy defaults: 3 retries, exponential backoff base 1s, injectable sleep](0019-retry-policy-defaults.md) {2026-05-02} — 1s/2s/4s defaults, configurable; `sleep` injected for fast tests
+- [Source contract extends with `REQUIRED_FIELDS`](0020-source-contract-required-fields.md) {2026-05-02} — fifth required export, validated by loader; rejected optional/env-var/hardcode alternatives
+- [Bad-JSON events route to DLQ via validator rejection](0021-bad-json-events-route-to-dlq.md) {2026-05-02} — entry-point callback substitutes a non-dict string so retry/DLQ takes over; rejected skip-checkpoint livelock

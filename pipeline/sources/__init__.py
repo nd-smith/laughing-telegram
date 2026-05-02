@@ -15,14 +15,19 @@ Required exports
 - ``EVENT_HUB_NAME: str`` — the Event Hub the worker consumes from.
 - ``KAFKA_OUTPUT_TOPIC: str`` — the Kafka topic enveloped events are
   published to (e.g. ``"propgateway.source-a"``).
+- ``REQUIRED_FIELDS: tuple[str, ...]`` — top-level fields the validator
+  (``pipeline.validation.validate``) must see on every raw event before
+  the extractor runs. May be empty (``()``) when the source has no
+  required fields. See ADR 0020.
 - ``extract(raw_event: dict) -> tuple[dict, str]`` — pure function that
   takes the parsed event body and returns ``(metadata_dict, event_type)``.
   The ``metadata_dict`` becomes ``envelope.metadata``; ``event_type``
   becomes ``envelope.event.type``.
 
-The four constants must be ``str``; ``extract`` must be callable. The
-loader below enforces this and raises a ``TypeError`` naming the
-offending attribute when the contract is violated.
+The four string constants must be ``str``; ``REQUIRED_FIELDS`` must be a
+``tuple`` of ``str``; ``extract`` must be callable. The loader below
+enforces this and raises a ``TypeError`` naming the offending attribute
+when the contract is violated.
 """
 
 from __future__ import annotations
@@ -62,6 +67,24 @@ def load_source(name: str) -> ModuleType:
             raise TypeError(
                 f"source module '{full_name}' attribute {attr!r} must be str, "
                 f"got {type(value).__name__}"
+            )
+
+    if not hasattr(module, "REQUIRED_FIELDS"):
+        raise TypeError(
+            f"source module '{full_name}' is missing required attribute 'REQUIRED_FIELDS'"
+        )
+    required_fields = module.REQUIRED_FIELDS
+    if not isinstance(required_fields, tuple):
+        raise TypeError(
+            f"source module '{full_name}' attribute 'REQUIRED_FIELDS' must be tuple, "
+            f"got {type(required_fields).__name__}"
+        )
+    for index, item in enumerate(required_fields):
+        if not isinstance(item, str):
+            raise TypeError(
+                f"source module '{full_name}' attribute 'REQUIRED_FIELDS' must be a "
+                f"tuple of str, but item at index {index} is "
+                f"{type(item).__name__}"
             )
 
     if not hasattr(module, "extract"):

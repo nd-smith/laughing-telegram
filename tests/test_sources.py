@@ -20,6 +20,7 @@ VALID_ATTRS = {
     "EVENT_HUB_NAMESPACE": "ns.servicebus.windows.net",
     "EVENT_HUB_NAME": "fake-events",
     "KAFKA_OUTPUT_TOPIC": "propgateway.fake",
+    "REQUIRED_FIELDS": ("data",),
     "extract": lambda raw_event: ({}, "status_update"),
 }
 
@@ -57,7 +58,41 @@ def test_load_valid_source_returns_module(register_source):
     assert module.EVENT_HUB_NAMESPACE == "ns.servicebus.windows.net"
     assert module.EVENT_HUB_NAME == "fake-events"
     assert module.KAFKA_OUTPUT_TOPIC == "propgateway.fake"
+    assert module.REQUIRED_FIELDS == ("data",)
     assert callable(module.extract)
+
+
+def test_missing_required_fields_attribute_names_the_attribute(register_source):
+    attrs = dict(VALID_ATTRS)
+    attrs.pop("REQUIRED_FIELDS")
+    register_source("missing_required_fields", **attrs)
+    with pytest.raises(TypeError) as excinfo:
+        load_source("missing_required_fields")
+    assert "REQUIRED_FIELDS" in str(excinfo.value)
+
+
+def test_required_fields_wrong_outer_type_names_the_attribute(register_source):
+    attrs = dict(VALID_ATTRS)
+    attrs["REQUIRED_FIELDS"] = ["data"]
+    register_source("required_fields_list", **attrs)
+    with pytest.raises(TypeError) as excinfo:
+        load_source("required_fields_list")
+    message = str(excinfo.value)
+    assert "REQUIRED_FIELDS" in message
+    assert "tuple" in message
+    assert "list" in message
+
+
+def test_required_fields_wrong_item_type_names_the_attribute(register_source):
+    attrs = dict(VALID_ATTRS)
+    attrs["REQUIRED_FIELDS"] = ("data", 42)
+    register_source("required_fields_int_item", **attrs)
+    with pytest.raises(TypeError) as excinfo:
+        load_source("required_fields_int_item")
+    message = str(excinfo.value)
+    assert "REQUIRED_FIELDS" in message
+    assert "index 1" in message
+    assert "int" in message
 
 
 def test_missing_string_attribute_names_the_attribute(register_source):
