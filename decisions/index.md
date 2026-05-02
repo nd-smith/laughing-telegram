@@ -12,3 +12,5 @@
 - [Custom JSON formatter, no `python-json-logger` dependency](0010-custom-json-formatter-no-dependency.md) {2026-05-02} — small `Formatter` subclass with `json.dumps(default=str)`; no new requirement
 - [Event Hub consumer callback shape: single-event](0011-consumer-callback-shape-single-event.md) {2026-05-02} — `callback(event)` per non-`None` event; checkpoint after success, log+continue on raise
 - [Event Hub consumer shutdown driven by entry-point flag](0012-consumer-shutdown-driven-by-entry-point-flag.md) {2026-05-02} — `run(callback, shutdown: Event)`; watcher thread closes client on flag set
+- [OneLake writer interval flush via background thread](0013-writer-interval-flush-via-background-thread.md) {2026-05-02} — daemon flusher thread + buffer lock; rejected `add()`-time check and entry-point `tick()`
+- [Parquet schema: flat envelope columns plus JSON metadata/payload](0014-parquet-schema-flat-columns-plus-json.md) {2026-05-02} — top-level fields as typed columns; `metadata` and `payload` as JSON strings
