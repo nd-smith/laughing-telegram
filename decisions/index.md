@@ -7,3 +7,4 @@
 - [Pin dependencies with exact versions](0005-pin-dependencies-with-exact-versions.md) {2026-05-01} — `requirements.txt` uses `==` for reproducible builds; deliberate manual bumps
 - [`build_envelope` keyword-only signature](0006-build-envelope-keyword-only-signature.md) {2026-05-01} — nine caller inputs passed as kwargs; rejected positional and dataclass alternatives
 - [`validate` returns a `NamedTuple` result](0007-validate-result-is-namedtuple.md) {2026-05-01} — `ValidationResult(ok, reason)` over bare tuple or dataclass
+- [Source-loader test fixtures via in-memory `sys.modules`](0008-source-loader-test-fixtures-via-sys-modules.md) {2026-05-02} — fake source modules constructed in tests, no on-disk fixture tree
